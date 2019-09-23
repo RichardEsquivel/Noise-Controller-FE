@@ -14,6 +14,7 @@ function App() {
       <Route path="/signup" component={SignUp} />
     </div>
   );
+
 }
 
 export default App;
