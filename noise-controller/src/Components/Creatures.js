@@ -43,6 +43,7 @@ function Creatures() {
     console.log(callback);
     callback(event.target.value);
   };
+
   return (
     <div>
       <div>
