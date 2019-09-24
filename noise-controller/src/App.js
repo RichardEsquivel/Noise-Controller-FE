@@ -6,14 +6,14 @@ import Settings from "./Components/Settings";
 import SignUp from "./Components/SignUp";
 
 function App() {
-  return (
-    <div>
-      <Header />
-      <Route exact path="/" component={Creatures} />
-      <Route path="/settings" component={Settings} />
-      <Route path="/signup" component={SignUp} />
-    </div>
-  );
+	return (
+		<div>
+			<Header />
+			<Route exact path="/" component={Creatures} />
+			<Route path="/settings" component={Settings} />
+			<Route path="/signup" component={SignUp} />
+		</div>
+	);
 
 }
 
