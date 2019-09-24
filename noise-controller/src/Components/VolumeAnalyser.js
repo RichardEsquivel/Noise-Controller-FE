@@ -1,6 +1,6 @@
 import React from 'react';
-import Slider from '@material-ui/core/Slider';
-import { withStyles } from 'material-ui/core/styles';
+import { Slider } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
 //Uitlizes Material UI Styles as a HOC
 const styles = {
@@ -54,6 +54,10 @@ class VolumeAnalyser extends React.Component {
 	}
 
 	handleChange = (e, value) => {
+
+
+
+
 		this.setState({
 			maxVol: value
 		}, () => {
