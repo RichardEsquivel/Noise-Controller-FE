@@ -47,6 +47,7 @@ function Creatures() {
 	return (
 		<div>
 			<div>
+				<MicrophoneVisual setIsPlaying={setIsPlaying} setIsLoud={setIsLoud} />
 				<button onClick={e => handleClick(e, setIsPlaying)}>{`Set Play to ${
 					isPlaying ? "false" : "true"
 					}`}</button>

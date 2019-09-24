@@ -34,6 +34,7 @@ class VolumeAnalyser extends React.Component {
 		this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
 		this.source = this.audioContext.createMediaStreamSource(this.props.audio);
 		this.source.connect(this.analyser);
+		this.tick();
 	}
 
 	componentWillUnmount() {
@@ -47,9 +48,10 @@ class VolumeAnalyser extends React.Component {
 		this.setState({ audioData: this.dataArray });
 		this.rafId = requestAnimationFrame(this.tick);
 		if (Math.max.apply(Math, this.state.audioData) > this.state.maxVol) {
-			this.setState({
-				violations: this.state.violations + 1
-			})
+			this.setState({ violations: this.state.violations + 1 })
+			this.props.setIsLoud(true)
+		} else {
+			this.props.setIsLoud(false);
 		}
 	}
 	//Setting up state values that can be utilized based on Slider and microphone input to appearance of creatures
