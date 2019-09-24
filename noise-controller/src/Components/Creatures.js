@@ -1,10 +1,12 @@
 import React from 'react';
+import MicrophoneVisual from './MicrophoneVisual';
 
 function Creatures() {
 	return (
 		<div>
 			Creatures
-    </div>
+		<MicrophoneVisual />
+		</div>
 	);
 }
 
