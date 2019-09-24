@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import VolumeAnalyser from './VolumeAnalyser';
 
 
-const MicrophoneVisual = () => {
+const MicrophoneVisual = ({ setIsPlaying, setIsLoud }) => {
 
 	const [audio, setAudio] = useState(null);
 
@@ -22,8 +22,10 @@ const MicrophoneVisual = () => {
 	const toggleMicrophone = () => {
 		if (audio) {
 			stopMicrophone();
+			setIsPlaying(false);
 		} else {
 			getMicrophone();
+			setIsPlaying(true);
 		}
 	}
 
@@ -32,7 +34,7 @@ const MicrophoneVisual = () => {
 			<button onClick={toggleMicrophone}>{audio ? 'Stop Mic' : 'Start Mic'}</button>
 			{audio &&
 				<div>
-					<VolumeAnalyser audio={audio} />
+					<VolumeAnalyser audio={audio} setIsLoud={setIsLoud} />
 				</div>
 			}
 		</div>
