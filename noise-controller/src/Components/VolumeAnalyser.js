@@ -2,7 +2,7 @@ import React from 'react';
 import { Slider } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-//Uitlizes Material UI Styles as a HOC
+//Utilizes Material UI Styles as a HOC
 const styles = {
 	root: {
 		width: 200,
@@ -52,7 +52,7 @@ class VolumeAnalyser extends React.Component {
 			})
 		}
 	}
-
+	//Setting up state values that can be utilized based on Slider and microphone input to appearance of creatures
 	handleChange = (e, value) => {
 
 
