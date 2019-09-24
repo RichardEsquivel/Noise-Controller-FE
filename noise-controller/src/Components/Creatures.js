@@ -40,8 +40,6 @@ function Creatures() {
   };
 
   const handleOnChange = (event, callback) => {
-    console.log(event);
-    console.log(callback);
     callback(event.target.value);
   };
 
