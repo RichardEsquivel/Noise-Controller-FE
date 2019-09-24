@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 
+
 const SignUp = ({ history }) => {
 	//Login will take in props and creds initial value will be a blank string and password setCreds will be utilized with a handleChange
 	const [creds, setCreds] = useState({ username: "", password: "" });
@@ -14,7 +15,7 @@ const SignUp = ({ history }) => {
 	// preventDefault will keep page from reloading upon submittal will send credentials object from forms which holds that value from user input
 	const handleSubmit = event => {
 		event.preventDefault();
-		axios.post('default http text', creds)
+		axios.post('NotTheRealBackend.com', creds)
 			//Code 200 Success
 			.then(response => {
 				console.log(response);

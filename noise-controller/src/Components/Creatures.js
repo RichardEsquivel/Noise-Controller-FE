@@ -79,8 +79,7 @@ function Creatures() {
             />
           ))
         : null}
-    </div>
-  );
+	);
 }
 
 export default Creatures;
