@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 function Creatures() {
   const [imagesArr, setImagesArr] = useState([]);
   const [isLoud, setIsLoud] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [quietInterval, setQuietInterval] = useState(3000);
   const [loudInterval, setLoudInterval] = useState(1000);
 
   useEffect(() => {
     let myTimer = null;
 
-    if (!isLoud) {
+    if (!isLoud && isPlaying) {
       //Classroom is quiet we push a random image from 1 to 35 at quietInterval
       clearInterval(myTimer);
 
@@ -21,7 +22,7 @@ function Creatures() {
           ]),
         quietInterval
       );
-    } else {
+    } else if (isLoud && isPlaying) {
       //Classroom is loud we start removing the last animal at loudInterval
       clearInterval(myTimer);
 
@@ -32,10 +33,10 @@ function Creatures() {
     }
 
     return () => clearInterval(myTimer);
-  }, [isLoud, quietInterval, loudInterval]);
+  }, [isLoud, isPlaying, quietInterval, loudInterval]);
 
-  const handleClick = () => {
-    setIsLoud(bool => !bool);
+  const handleClick = (e, callback) => {
+    callback(bool => !bool);
   };
 
   const handleOnChange = (event, callback) => {
@@ -47,7 +48,10 @@ function Creatures() {
   return (
     <div>
       <div>
-        <button onClick={handleClick}>{`Set isLoud to ${
+        <button onClick={e => handleClick(e, setIsPlaying)}>{`Set Play to ${
+          isPlaying ? "false" : "true"
+        }`}</button>
+        <button onClick={e => handleClick(e, setIsLoud)}>{`Set isLoud to ${
           isLoud ? "false" : "true"
         }`}</button>
         <label for="quietInterval">Quiet Interval (ms): </label>
