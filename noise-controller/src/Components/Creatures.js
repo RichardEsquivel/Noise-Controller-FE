@@ -54,14 +54,14 @@ function Creatures() {
         <button onClick={e => handleClick(e, setIsLoud)}>{`Set isLoud to ${
           isLoud ? "false" : "true"
         }`}</button>
-        <label for="quietInterval">Quiet Interval (ms): </label>
+        <label htmlFor="quietInterval">Quiet Interval (ms): </label>
         <input
           id="quietInterval"
           type="text"
           value={quietInterval}
           onChange={e => handleOnChange(e, setQuietInterval)}
         />
-        <label for="loudInterval">Loud Interval (ms): </label>
+        <label htmlFor="loudInterval">Loud Interval (ms): </label>
         <input
           id="loudInterval"
           type="text"
