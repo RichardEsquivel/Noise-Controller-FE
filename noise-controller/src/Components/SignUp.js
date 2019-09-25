@@ -17,11 +17,10 @@ const SignUp = ({ history }) => {
 		axios.post('https://noisecontroller.herokuapp.com/api/auth/register', creds)
 			//Code 200 Success
 			.then(response => {
-				console.log(response);
+				console.log("Look at this response!", response);
 				//place token defined here in server.js into local storage from response this will allow us to access the value of the token in other components from localStorage
-				localStorage.setItem('token', response.data.payload);
 				//upon success we want to send user to another page that they were trying to access 
-				history.push("/settings");
+				history.push("/login");
 
 			})
 			.catch(error => console.log(error.response));
@@ -29,15 +28,15 @@ const SignUp = ({ history }) => {
 	}
 
 	return (
-		//handleChange will take user value when and place into spread array of creds and add that new value to the array for username and password handleSubmit will call axios.post upon submittal and push to server api/login
+		//handleChange will take user value when and place into spread array of creds and add that new value to the array for username and password handleSubmit will call axios.post upon submittal and push to server api/register
 		<div className="login-styles">
 			<h1>Let's Sign Up!</h1>
 
-			{/* <form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit}>
 				<input type="text" name="username" placeholder="username" onChange={handleChange} value={creds.username} />
 				<input type="password" name="password" placeholder="password" onChange={handleChange} value={creds.password} />
-				<button type="submit"> Login!</button>
-			</form> */}
+				<button type="submit"> SignUp!</button>
+			</form>
 
 
 		</div>
