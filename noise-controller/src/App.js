@@ -3,8 +3,11 @@ import { Route, Redirect } from "react-router-dom";
 import Header from "./Components/Header";
 import Creatures from "./Components/Creatures";
 import Settings from "./Components/Settings";
+import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp.js";
+import "./App.css";
+
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   return (
@@ -39,6 +42,7 @@ function App() {
       <Route path="/signup" component={SignUp} />
     </div>
   );
+
 }
 
 export default App;
