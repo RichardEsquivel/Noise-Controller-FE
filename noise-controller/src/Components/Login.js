@@ -20,7 +20,7 @@ const Login = ({ history }) => {
 			.then(response => {
 				console.log(response);
 				//place token defined here in server.js into local storage from response this will allow us to access the value of the token in other components from localStorage
-				localStorage.setItem('token', response.data.payload);
+				localStorage.setItem('token', response.data.token);
 				//upon success we want to send user to another page that they were trying to access 
 				history.push("/creatures");
 
