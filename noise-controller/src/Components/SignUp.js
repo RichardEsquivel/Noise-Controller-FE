@@ -20,7 +20,7 @@ const SignUp = (props) => {
 				console.log("Look at this response!", response);
 				//place token defined here in server.js into local storage from response this will allow us to access the value of the token in other components from localStorage
 				//upon success we want to send user to another page that they were trying to access 
-				props.history.push("/login");
+				//props.history.push("/login");
 
 			})
 			.catch(error => { props.history.push("/login"); console.log(error.response) });
