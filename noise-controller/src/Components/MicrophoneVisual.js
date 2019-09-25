@@ -31,7 +31,7 @@ const MicrophoneVisual = ({ setIsPlaying, setIsLoud }) => {
 
 	return (
 		<div>
-			<button onClick={toggleMicrophone}>{audio ? 'Stop Mic' : 'Start Mic'}</button>
+			<button onClick={toggleMicrophone}>{audio ? 'Stop Mic' : 'Start Mic'}stat</button>
 			{audio &&
 				<div>
 					<VolumeAnalyser audio={audio} setIsLoud={setIsLoud} />
