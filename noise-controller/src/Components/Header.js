@@ -9,7 +9,7 @@ TODO: Better Styling, maybe react-icons, Font family,
 
 //Styling NavLink, Div and Nav
 const StyledNavLink = styled(NavLink).attrs({
-  activeClassName: "active"
+	activeClassName: "active"
 })`
   text-decoration: none;
   color: black;
@@ -38,39 +38,39 @@ const StyledNav = styled.nav`
 `;
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    //Code here to grab/check for session to see if user is logged in or not
-  }, []);
+	useEffect(() => {
+		//Code here to grab/check for session to see if user is logged in or not
+	}, []);
 
-  return (
-    <HeaderDiv
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        width: "100%"
-      }}
-    >
-      <h2>Noise Controller</h2>
-      <StyledNav>
-        <StyledNavLink exact to="/">
-          Play
+	return (
+		<HeaderDiv
+			style={{
+				display: "flex",
+				justifyContent: "space-between",
+				width: "100%"
+			}}
+		>
+			<h2>Noise Controller</h2>
+			<StyledNav>
+				<StyledNavLink exact to="/">
+					Play
         </StyledNavLink>
 
-        {isLoggedIn ? (
-          <>
-            <StyledNavLink to="/classrooms">Classrooms</StyledNavLink>
-            <StyledNavLink to="/scoreboard">Score Board</StyledNavLink>
-            <StyledNavLink to="/settings">Settings</StyledNavLink>
-            <StyledNavLink to="/signout">Log Out</StyledNavLink>
-          </>
-        ) : (
-          <StyledNavLink to="/signup">Log In</StyledNavLink>
-        )}
-      </StyledNav>
-    </HeaderDiv>
-  );
+				{isLoggedIn ? (
+					<>
+						<StyledNavLink to="/classrooms">Classrooms</StyledNavLink>
+						<StyledNavLink to="/scoreboard">Score Board</StyledNavLink>
+						<StyledNavLink to="/settings">Settings</StyledNavLink>
+						<StyledNavLink to="/signout">Log Out</StyledNavLink>
+					</>
+				) : (
+						<StyledNavLink to="/login">Log In</StyledNavLink>
+					)}
+			</StyledNav>
+		</HeaderDiv>
+	);
 }
 
 export default Header;
