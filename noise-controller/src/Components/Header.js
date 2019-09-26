@@ -4,12 +4,10 @@ import { Modal } from "react-router-modal";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListIcon from "@material-ui/icons/List";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import axiosWithAuth from "../utils/axiosWithAuth";
 import Scoreboard from "./Scoreboard";
 
 /*
@@ -69,7 +67,6 @@ function Header(props) {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState(0);
   const [prevValue, setPrevValue] = useState(0);
-  const [scores, setScores] = useState([]);
 
   const classes = useStyles();
 
@@ -153,24 +150,7 @@ function Header(props) {
             onClick={() => showModal()}
           />
         ) : null}
-        {isLoggedIn ? (
-          <StyledTab
-            label={
-              <div style={{ display: "flex" }}>
-                <SettingsIcon
-                  style={{
-                    fontSize: "inherit",
-                    marginRight: "10px",
-                    marginTop: "8px"
-                  }}
-                />
-                Settings
-              </div>
-            }
-            component={NavLink}
-            to="/settings"
-          />
-        ) : null}
+
         {isLoggedIn ? (
           <StyledTab
             label={
