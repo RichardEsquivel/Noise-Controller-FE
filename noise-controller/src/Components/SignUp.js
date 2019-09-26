@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const SignUp = (props) => {
 	//Login will take in props and creds initial value will be a blank string and password setCreds will be utilized with a handleChange
-	const [creds, setCreds] = useState({ username: "", password: "" });
+	const [creds, setCreds] = useState({ username: "", password: "", classname: "" });
 
 	const handleChange = e => {
 		// [] allows us to access event.target.name expression to access name
@@ -21,9 +21,9 @@ const SignUp = (props) => {
 				//place token defined here in server.js into local storage from response this will allow us to access the value of the token in other components from localStorage
 				//upon success we want to send user to another page that they were trying to access 
 				//props.history.push("/login");
-
+				props.history.push("/login");
 			})
-			.catch(error => { props.history.push("/login"); console.log(error.response) });
+			.catch(error => { console.log(error.response) });
 
 
 
@@ -37,8 +37,15 @@ const SignUp = (props) => {
 			<h1>Let's Sign Up!</h1>
 
 			<form onSubmit={handleSubmit}>
-				<input type="text" name="username" placeholder="username" onChange={handleChange} value={creds.username} />
-				<input type="password" name="password" placeholder="password" onChange={handleChange} value={creds.password} />
+				<input type="text"
+					name="username" placeholder="username"
+					onChange={handleChange} value={creds.username} />
+				<input type="password"
+					name="password" placeholder="password"
+					onChange={handleChange} value={creds.password} />
+				<input type="text"
+					name="classname" placeholder="classname"
+					onChange={handleChange} value={creds.classname} />
 				<button type="submit"> SignUp!</button>
 			</form>
 
