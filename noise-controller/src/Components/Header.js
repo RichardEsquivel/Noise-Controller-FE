@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { NavLink, Link } from "react-router-dom";
 import { Modal } from "react-router-modal";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListIcon from "@material-ui/icons/List";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import Scoreboard from "./Scoreboard";
 
 /*
 TODO: Better Styling, maybe react-icons, Font family,
@@ -57,6 +56,9 @@ const useStyles = makeStyles(theme => ({
 		fontSize: "2.2rem",
 		color: "#fff",
 		lineHeight: ".2rem"
+	},
+	modal: {
+		minWidth: "600px"
 	}
 }));
 
@@ -65,7 +67,6 @@ function Header(props) {
 	const [show, setShow] = useState(false);
 	const [value, setValue] = useState(0);
 	const [prevValue, setPrevValue] = useState(0);
-	const [scores, setScores] = useState([]);
 
 	const classes = useStyles();
 
@@ -75,14 +76,6 @@ function Header(props) {
 			setValue(0);
 		}
 	}, [props]);
-
-	useEffect(() => {
-		if (show) {
-			//Axios get scores
-			//then setScores
-			//error console.error
-		}
-	}, [show]);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -106,16 +99,7 @@ function Header(props) {
 	};
 
 	const renderModal = () => {
-		return (
-			<Modal onBackdropClick={() => hideModal()}>
-				Your scores are:
-        {scores.length > 0 ? (
-					scores.map(score => <p>{score}</p>)
-				) : (
-						<p>No scores to display</p>
-					)}
-			</Modal>
-		);
+		return <Modal component={Scoreboard} onBackdropClick={() => hideModal()} />;
 	};
 
 	return (
@@ -166,24 +150,7 @@ function Header(props) {
 						onClick={() => showModal()}
 					/>
 				) : null}
-				{isLoggedIn ? (
-					<StyledTab
-						label={
-							<div style={{ display: "flex" }}>
-								<SettingsIcon
-									style={{
-										fontSize: "inherit",
-										marginRight: "10px",
-										marginTop: "8px"
-									}}
-								/>
-								Settings
-              </div>
-						}
-						component={NavLink}
-						to="/settings"
-					/>
-				) : null}
+
 				{isLoggedIn ? (
 					<StyledTab
 						label={
