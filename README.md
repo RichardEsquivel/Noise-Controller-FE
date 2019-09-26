@@ -51,6 +51,6 @@ npm start
 
 [Lambda Schools](https://lambdaschool.com/)
 
-## Author
+## Authors
 
-[James Bishop](https://github.com/jambis), [Richard Esquivel](https://github.com/RichardEsquivel), [Jonathan Calderaro](https://github.com/jcalderaro)
+[James Bishop](https://github.com/jambis) and [Richard Esquivel](https://github.com/RichardEsquivel)
