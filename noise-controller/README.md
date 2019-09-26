@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Front-End
 
-## Available Scripts
+Noise Controller aims to incentivize children to be quiet in the classroom.
 
-In the project directory, you can run:
+Read More on the [Technical Design Document](https://www.notion.so/Product-Vision-8eedbfacb41b49e0b5ef26488a3db1f5)
 
-### `npm start`
+[Trello Board](https://trello.com/b/QH99rrkj/noise-controller)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Whimsical Wireframe](https://whimsical.com/SM6j9LsD6QAw8V8uV8VtD1)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The React front end of the application is deployed [here](https://noise-controller-23.netlify.com/)
 
-### `npm test`
+## Motivation
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+As a teacher, it can be hard to control the noise level in your classroom! You need an app that holds kids attention, and is sensitive to the noise level in the room to motivate them to stay quiet. While some exist, they seem to encourage kids to yell (like balls that bounce higher if you yell louder). This app will reveal unique animals (choose a theme for this app) only if it's quiet enough, keeping the kids quiet.
 
-### `npm run build`
+## Implemented features
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Users can sign up and create a classroom.
+- Classroom will receive points based on how many creatures appear on the screen if it's quiet enough
+- Users can set the sensitivity of their microphone
+- Shows a live score on the page and final score page at the end of each day.
+- Users can comment and message one another in the app
+- Scoreboard that diplays classroom daily scores
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### `npm run eject`
+- Fork the project
+- Clone or download the project
+- Navigate into the directory and Install dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+cd Front-End/noise-controller
+npm i
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Finally you can run the app by typing in your terminal
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Technologies used
 
-## Learn More
+- React
+- React Router
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Acknowledgement
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Lambda Schools](https://lambdaschool.com/)
 
-### Code Splitting
+## Author
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+[James Bishop](https://github.com/jambis), [Richard Esquivel](https://github.com/RichardEsquivel), [Jonathan Calderaro](https://github.com/jcalderaro)
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
