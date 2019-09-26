@@ -35,7 +35,7 @@ function App() {
 			<Route path="/creatures" component={Creatures} />
 			{/* 
           Build a PrivateRoute component that will 
-          display BubblePage when you're authenticated 
+          display Settings when you're authenticated 
 		*/}
 			<ProtectedRoute path="/settings" component={Settings} />
 			<Route path="/signup" component={SignUp} />

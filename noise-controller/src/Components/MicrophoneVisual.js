@@ -22,17 +22,33 @@ const MicrophoneVisual = ({ setIsPlaying, setIsLoud }) => {
 	const toggleMicrophone = () => {
 		if (audio) {
 			stopMicrophone();
-			setIsPlaying(false);
 		} else {
 			getMicrophone();
-			setIsPlaying(true);
 		}
 	}
 
+	const startGame = () => {
+		setIsPlaying(true)
+	}
+
+	const stopGame = () => {
+		setIsPlaying(false)
+	}
+
+	const toggleGame = () => {
+		if (setIsPlaying) {
+			stopGame()
+		} else {
+			startGame()
+		}
+	}
+
+
+
 	return (
 		<div>
-			<button onClick={toggleMicrophone}>{audio ? 'Stop Mic' : 'Start Mic'} {audio ? setIsPlaying(true) : setIsPlaying(false)}
-			</button>
+			<button onClick={toggleMicrophone}>{audio ? 'Stop Mic' : 'Start Mic'}</button>
+			<button onClick={toggleGame}>Game!</button>
 			{audio &&
 				<div>
 					<VolumeAnalyser audio={audio} setIsLoud={setIsLoud} />
