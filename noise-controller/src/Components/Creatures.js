@@ -61,10 +61,9 @@ const useStyles = makeStyles(theme => ({
     bottom: "0",
     left: "50%",
     fontSize: "12px",
-    color: "grey",
+    color: "black",
     cursor: "pointer",
-    transform: "translate(-50%)",
-    color: "black"
+    transform: "translate(-50%)"
   }
 }));
 
@@ -79,6 +78,8 @@ function Creatures() {
   const [expandButton1, setExpandButton1] = useState(false);
   const [expandButton2, setExpandButton2] = useState(false);
   const [expandButton3, setExpandButton3] = useState(false);
+  const [classId, setClassId] = useState();
+  const [nameClass, setNameClass] = useState(null);
 
   const classes = useStyles();
 
@@ -126,14 +127,12 @@ function Creatures() {
     setStartGame(bool => !bool);
   };
 
-  const [classId, setClassId] = useState();
-
   useEffect(() => {
     axiosWithAuth()
       .get(`https://noisecontroller.herokuapp.com/api/classes/`)
       .then(response => {
-        const id = response.data[0].id;
-        setClassId(id);
+        setClassId(response.data[0].id);
+        setNameClass(response.data[0].classname);
       })
       .catch(error => {
         console.log(error.response);
@@ -203,6 +202,7 @@ function Creatures() {
           Finish Game
           <CheckIcon className={classes.rightIcon} />
         </Button>
+        <h2>{nameClass ? `Class Name: ${nameClass}` : null}</h2>
         <h2>Current score: {currentScore}</h2>
         <span
           className={classes.expandButton}
