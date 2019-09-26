@@ -1,57 +1,111 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
+const useStyles = makeStyles(theme => ({
+  container: {
+    margin: "50px auto",
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    width: "800px",
+    textAlign: "center",
+    padding: "20px 40px",
+    background: "rgba(101,157,189,1)"
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1)
+  },
+  button: {
+    margin: theme.spacing(1)
+  },
+  divider: {
+    borderTop: "1px solid grey"
+  }
+}));
 
-const SignUp = (props) => {
-	//Login will take in props and creds initial value will be a blank string and password setCreds will be utilized with a handleChange
-	const [creds, setCreds] = useState({ username: "", password: "", classname: "" });
+const SignUp = props => {
+  const [creds, setCreds] = useState({
+    username: "",
+    password: "",
+    classname: ""
+  });
+  const classes = useStyles();
 
-	const handleChange = e => {
-		// [] allows us to access event.target.name expression to access name
-		setCreds({ ...creds, [e.target.name]: e.target.value })
+  const handleChange = e => {
+    setCreds({ ...creds, [e.target.name]: e.target.value });
+  };
 
-	}
-	// preventDefault will keep page from reloading upon submittal will send credentials object from forms which holds that value from user input
-	const handleSubmit = event => {
-		event.preventDefault();
-		axios.post('https://noisecontroller.herokuapp.com/api/auth/register', creds)
-			//Code 200 Success
-			.then(response => {
-				console.log("Look at this response!", response);
-				//place token defined here in server.js into local storage from response this will allow us to access the value of the token in other components from localStorage
-				//upon success we want to send user to another page that they were trying to access 
-				//props.history.push("/login");
-				props.history.push("/login");
-			})
-			.catch(error => { console.log(error.response) });
+  const handleSubmit = event => {
+    event.preventDefault();
+    axios
+      .post("https://noisecontroller.herokuapp.com/api/auth/register", creds)
+      .then(response => {
+        props.history.push("/login");
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  };
 
+  return (
+    <div className={classes.container}>
+      <h1 style={{ color: "white" }}>Welcome to Noise Controller!</h1>
+      <Divider className={classes.divider} />
+      <h2 style={{ color: "white" }}>Register an account</h2>
 
-
-	}
-	console.log("this Is Log", props)
-
-	return (
-
-		//handleChange will take user value when and place into spread array of creds and add that new value to the array for username and password handleSubmit will call axios.post upon submittal and push to server api/register
-		<div className="login-styles">
-			<h1>Let's Sign Up!</h1>
-
-			<form onSubmit={handleSubmit}>
-				<input type="text"
-					name="username" placeholder="username"
-					onChange={handleChange} value={creds.username} />
-				<input type="password"
-					name="password" placeholder="password"
-					onChange={handleChange} value={creds.password} />
-				<input type="text"
-					name="classname" placeholder="classname"
-					onChange={handleChange} value={creds.classname} />
-				<button type="submit"> SignUp!</button>
-			</form>
-
-
-		</div>
-
-	)
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <TextField
+          id="outlined-name"
+          label="Username"
+          name="username"
+          className={classes.textField}
+          value={creds.username}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-password-input"
+          type="password"
+          label="Password"
+          name="password"
+          className={classes.textField}
+          value={creds.password}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-classroom"
+          label="Classroom Name"
+          name="classname"
+          className={classes.textField}
+          value={creds.classname}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.button}
+        >
+          Sign Up
+        </Button>
+      </form>
+    </div>
+  );
 };
 export default SignUp;
