@@ -7,7 +7,6 @@ import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import "./App.css";
 
-
 const ProtectedRoute = ({ component: Component, ...rest }) => {
 	return (
 		<Route
@@ -27,7 +26,7 @@ function App() {
 
 	return (
 		<div>
-			<Header loggedIn={loggedIn} />
+			<Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
 			<Route
 				path="/login"
 				render={props => <Login {...props} setLoggedIn={setLoggedIn} />}
@@ -41,7 +40,6 @@ function App() {
 			<Route path="/signup" component={SignUp} />
 		</div>
 	);
-
 }
 
 export default App;
