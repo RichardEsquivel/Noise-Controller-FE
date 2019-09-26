@@ -1,76 +1,190 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink, Link } from "react-router-dom";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ListIcon from "@material-ui/icons/List";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 
 /*
 TODO: Better Styling, maybe react-icons, Font family,
       colors
 */
-
-//Styling NavLink, Div and Nav
-const StyledNavLink = styled(NavLink).attrs({
-  activeClassName: "active"
-})`
-  text-decoration: none;
-  color: black;
-  margin: 0 1em;
-  font-size: 1.3rem
-
-  &:hover {
-    text-decoration: underline;
+const StyledTabs = withStyles({
+  indicator: {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    "& > div": {
+      width: "100%",
+      backgroundColor: "#3E51B4"
+    }
   }
-  &.active {
-    color: blue;
+})(props => <Tabs {...props} TabIndicatorProps={{ children: <div /> }} />);
+
+const StyledTab = withStyles(theme => ({
+  root: {
+    textTransform: "none",
+    color: "#fff",
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: "1.5rem",
+    marginRight: theme.spacing(1),
+    "&:focus": {
+      opacity: 1
+    }
   }
-`;
+}))(props => <Tab disableRipple {...props} />);
 
-const HeaderDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-const StyledNav = styled.nav`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 40%;
-`;
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "rgba(101,157,189,1)",
+    padding: "10px 0"
+  },
+  tabs: {
+    display: "flex",
+    justifyContent: "flex-end"
+  },
+  header: {
+    marginLeft: theme.spacing(3),
+    fontFamily: "'Bubblegum Sans', cursive;",
+    fontSize: "2.2rem",
+    color: "#fff",
+    lineHeight: ".2rem"
+  }
+}));
 
 function Header(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [value, setValue] = useState(0);
+
+  const classes = useStyles();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) setIsLoggedIn(true);
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+      setValue(0);
+    }
   }, [props]);
 
-  console.log(props);
-  return (
-    <HeaderDiv
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        width: "100%"
-      }}
-    >
-      <h2>Noise Controller</h2>
-      <StyledNav>
-        <StyledNavLink exact to="/">
-          Play
-        </StyledNavLink>
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
+  const signOut = () => {
+    localStorage.removeItem("token");
+    props.setLoggedIn(false);
+    setIsLoggedIn(false);
+    setValue(1);
+  };
+  return (
+    <div className={classes.root}>
+      <h2 className={classes.header}>
+        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          Noise Controller
+        </Link>
+      </h2>
+      <StyledTabs
+        value={value}
+        onChange={handleChange}
+        aria-label="styled tabs"
+        className={classes.tabs}
+      >
+        <StyledTab
+          label={
+            <div style={{ display: "flex" }}>
+              <PlayCircleOutlineIcon
+                style={{
+                  fontSize: "inherit",
+                  marginRight: "10px",
+                  marginTop: "9px"
+                }}
+              />{" "}
+              Play
+            </div>
+          }
+          component={NavLink}
+          to="/creatures"
+        />
         {isLoggedIn ? (
-          <>
-            <StyledNavLink to="/classrooms">Classrooms</StyledNavLink>
-            <StyledNavLink to="/scoreboard">Score Board</StyledNavLink>
-            <StyledNavLink to="/settings">Settings</StyledNavLink>
-            <StyledNavLink to="/signout">Log Out</StyledNavLink>
-          </>
-        ) : (
-          <StyledNavLink to="/login">Log In</StyledNavLink>
-        )}
-      </StyledNav>
-    </HeaderDiv>
+          <StyledTab
+            label={
+              <div style={{ display: "flex" }}>
+                <ListIcon
+                  style={{
+                    fontSize: "inherit",
+                    marginRight: "10px",
+                    marginTop: "8px"
+                  }}
+                />{" "}
+                Scoreboard
+              </div>
+            }
+            component={NavLink}
+            to="/"
+          />
+        ) : null}
+        {isLoggedIn ? (
+          <StyledTab
+            label={
+              <div style={{ display: "flex" }}>
+                <SettingsIcon
+                  style={{
+                    fontSize: "inherit",
+                    marginRight: "10px",
+                    marginTop: "8px"
+                  }}
+                />{" "}
+                Settings
+              </div>
+            }
+            component={NavLink}
+            to="/settings"
+          />
+        ) : null}
+        {isLoggedIn ? (
+          <StyledTab
+            label={
+              <div style={{ display: "flex" }}>
+                <ExitToAppIcon
+                  style={{
+                    fontSize: "inherit",
+                    marginRight: "10px",
+                    marginTop: "8px"
+                  }}
+                />{" "}
+                Sign Out
+              </div>
+            }
+            component={NavLink}
+            to="/login"
+            onClick={signOut}
+          />
+        ) : null}
+        {!isLoggedIn ? (
+          <StyledTab
+            label={
+              <div style={{ display: "flex" }}>
+                <PersonAddIcon
+                  style={{
+                    fontSize: "inherit",
+                    marginRight: "10px",
+                    marginTop: "8px"
+                  }}
+                />{" "}
+                Log In
+              </div>
+            }
+            component={NavLink}
+            to="/login"
+          />
+        ) : null}
+      </StyledTabs>
+    </div>
   );
 }
 
