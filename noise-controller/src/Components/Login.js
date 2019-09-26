@@ -1,25 +1,53 @@
 import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
+const useStyles = makeStyles(theme => ({
+  container: {
+    margin: "50px auto",
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    width: "800px",
+    textAlign: "center",
+    padding: "20px 40px",
+    background: "rgba(101,157,189,1)"
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1)
+  },
+  button: {
+    margin: theme.spacing(1)
+  },
+  divider: {
+    borderTop: "1px solid grey"
+  }
+}));
+
 const Login = ({ history, setLoggedIn }) => {
-  //Login will take in props and creds initial value will be a blank string and password setCreds will be utilized with a handleChange
   const [creds, setCreds] = useState({ username: "", password: "" });
+  const classes = useStyles();
 
   const handleChange = e => {
-    // [] allows us to access event.target.name expression to access name
     setCreds({ ...creds, [e.target.name]: e.target.value });
   };
-  // preventDefault will keep page from reloading upon submittal will send credentials object from forms which holds that value from user input
+
   const handleSubmit = event => {
     event.preventDefault();
     axios
       .post("https://noisecontroller.herokuapp.com/api/auth/login", creds)
-      //Code 200 Success
       .then(response => {
-        console.log(response);
-        //place token defined here in server.js into local storage from response this will allow us to access the value of the token in other components from localStorage
         localStorage.setItem("token", response.data.token);
-        //upon success we want to send user to another page that they were trying to access
         history.push("/creatures");
         setLoggedIn(true);
       })
@@ -27,31 +55,53 @@ const Login = ({ history, setLoggedIn }) => {
   };
 
   return (
-    //handleChange will take user value when and place into spread array of creds and add that new value to the array for username and password handleSubmit will call axios.post upon submittal and push to server api/login
-    <div className="login-styles">
-      <h1>Welcome to Noise Controller!</h1>
+    <div className={classes.container}>
+      <h1 style={{ color: "white" }}>Welcome to Noise Controller!</h1>
+      <Divider className={classes.divider} />
+      <h2 style={{ color: "white" }}>Log In</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <TextField
+          id="outlined-name"
+          label="Username"
           name="username"
-          placeholder="username"
-          onChange={handleChange}
+          className={classes.textField}
           value={creds.username}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
           onChange={handleChange}
-          value={creds.password}
+          margin="normal"
+          variant="outlined"
         />
-        <button type="submit"> Log in when ready!</button>
+        <TextField
+          id="outlined-password-input"
+          type="password"
+          label="Password"
+          name="password"
+          className={classes.textField}
+          value={creds.password}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.button}
+        >
+          Login
+        </Button>
       </form>
-      <button className="signup-btn" onClick={() => history.push("/signup")}>
-        {" "}
-        SignUp!
-      </button>
+      <br />
+      <Divider className={classes.divider} />
+      <br />
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={() => history.push("/signup")}
+      >
+        Sign Up
+      </Button>
     </div>
   );
 };
