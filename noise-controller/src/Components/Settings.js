@@ -7,15 +7,10 @@ function Settings() {
 	const [editClassRoom, setEditClassRoom] = useState(false);
 	const [classRoomName, setClassRoomName] = useState("My Classrom");
 
-	useEffect(() => {
-		//Axios get request for sensitivity
-		//and highscore
-	}, []);
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		setEditClassRoom(false);
-	}
+
+
+
 
 	function handleChange(e) {
 		e.persist();
@@ -25,7 +20,10 @@ function Settings() {
 	const renderClassRoom = () => {
 		return (
 			<div>
-				{!editClassRoom ? (
+				<p>{classRoomName}</p>
+
+
+				{/* {!editClassRoom ? (
 					<div>
 						<p>{classRoomName}</p>
 						<button onClick={() => setEditClassRoom(true)}>Edit</button>
@@ -40,7 +38,7 @@ function Settings() {
 							/>
 							<button type="submit">Edit</button>
 						</form>
-					)}
+					)} */}
 			</div>
 		);
 	};
