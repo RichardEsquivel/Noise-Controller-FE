@@ -1,46 +1,47 @@
-import React, { useState } from 'react';
-import VolumeAnalyser from './VolumeAnalyser';
+import React, { useState, useEffect } from "react";
+import VolumeAnalyser from "./VolumeAnalyser";
 
+const MicrophoneVisual = ({ setIsPlaying, setIsLoud, startGame }) => {
+  const [audio, setAudio] = useState(null);
+  const [updateVolA, setUpdateVolA] = useState(false);
 
-const MicrophoneVisual = ({ setIsPlaying, setIsLoud }) => {
+  useEffect(() => {
+    if (startGame) {
+      getMicrophone();
+    }
 
-	const [audio, setAudio] = useState(null);
+    if (!startGame && audio) {
+      stopMicrophone();
+      if (setIsPlaying) setIsPlaying(false);
+    }
+  }, [startGame]);
 
-	const getMicrophone = async () => {
-		const media = await navigator.mediaDevices.getUserMedia({
-			audio: true,
-			video: false
-		});
-		setAudio(media);
-	}
+  const getMicrophone = async () => {
+    const media = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: false
+    });
+    if (setIsPlaying) setIsPlaying(true);
+    setUpdateVolA(true);
+    setAudio(media);
+  };
 
-	const stopMicrophone = () => {
-		audio.getTracks().forEach(track => track.stop());
-		setAudio(null);
-	}
+  const stopMicrophone = () => {
+    audio.getTracks().forEach(track => track.stop());
+    setUpdateVolA(false);
+    setAudio(null);
+  };
 
-	const toggleMicrophone = () => {
-		if (audio) {
-			stopMicrophone();
-			setIsPlaying(false);
-		} else {
-			getMicrophone();
-			setIsPlaying(true);
-		}
-	}
-
-	return (
-		<div>
-			<button onClick={toggleMicrophone}>{audio ? 'Stop Mic' : 'Start Mic'} {audio ? setIsPlaying(true) : setIsPlaying(false)}
-			</button>
-			{audio &&
-				<div>
-					<VolumeAnalyser audio={audio} setIsLoud={setIsLoud} />
-				</div>
-			}
-		</div>
-	);
-
-}
+  return (
+    <div>
+      <VolumeAnalyser
+        audio={audio}
+        setIsLoud={setIsLoud}
+        updateVolA={updateVolA}
+        setUpdateVolA={setUpdateVolA}
+      />
+    </div>
+  );
+};
 
 export default MicrophoneVisual;
