@@ -89,9 +89,11 @@ class VolumeAnalyser extends React.Component {
   }
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.rafId);
-    this.analyser.disconnect();
-    this.source.disconnect();
+    if (this.props.audio) {
+      cancelAnimationFrame(this.rafId);
+      this.analyser.disconnect();
+      this.source.disconnect();
+    }
   }
 
   tick = () => {
