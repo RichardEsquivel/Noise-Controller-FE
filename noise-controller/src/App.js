@@ -9,26 +9,23 @@ import "react-router-modal/css/react-router-modal.css";
 import "./App.css";
 
 function App(props) {
-  const [loggedIn, setLoggedIn] = useState(false);
-  console.log(props);
-  return (
-    <div>
-      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-      <ModalContainer />
+	const [loggedIn, setLoggedIn] = useState(false);
+	console.log(props);
+	return (
+		<div>
+			<Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+			<ModalContainer />
 
-      <Route
-        path="/login"
-        render={props => <Login {...props} setLoggedIn={setLoggedIn} />}
-      />
-      <Route path="/creatures" component={Creatures} />
-      {/* 
-          Build a PrivateRoute component that will 
-          display Settings when you're authenticated 
-		*/}
+			<Route
+				path="/login"
+				render={props => <Login {...props} setLoggedIn={setLoggedIn} />}
+			/>
+			<Route path="/creatures" component={Creatures} />
 
-      <Route path="/signup" component={SignUp} />
-    </div>
-  );
+
+			<Route path="/signup" component={SignUp} />
+		</div>
+	);
 }
 
 export default App;
